@@ -1,0 +1,19 @@
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Username</th>
+    </tr>
+  </thead>
+  <tbody>
+ {{# each orders }}
+ 	<table class="table">
+    <tr>
+      <th scope="row"></th>
+      <td>{{this.orderNo}}</td>
+      <td>{{this.count}}</td>
+      <td>{{this.status}}</td>
+    </tr>
+ {{/each}}
+ </tbody>

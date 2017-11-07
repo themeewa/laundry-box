@@ -1,0 +1,94 @@
+<div ng-app = "mainApp" ng-controller = "inventoryController">
+  <form name="orderForm" ng-submit = "saveOrder()">
+      <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="inputOrderNo" class="col-form-label">order No</label>
+        <input type="number" class="form-control" id="inputOrderNo" ng-required="true" ng-model = "order.orderNo" placeholder="OrderNo">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="inputCustName" class="col-form-label" >customer Name</label>
+        <input type="text" class="form-control" id="inputCustName" ng-required="true" ng-model = "order.custName" placeholder="Customer Name">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="inputCustPhone" class="col-form-label">Phone</label>
+        <input type="number" class="form-control" id="inputCustPhone" ng-required="true" ng-model = "order.custPhone" placeholder="Phone no">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="inputOrderNo" class="col-form-label">discount</label>
+        <input type="number" class="form-control" id="inputOrderNo" ng-required="true" ng-model = "order.oDiscount" placeholder="OrderNo">
+      </div>
+      <button class="btn btn-sauccess" type="submit">save order</button>
+  </form>
+  <div class="clearfix"></div>
+
+  <table class="table table-sm" ng-if = "counter">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>color</th>
+        <th>type</th>
+        <th>rate</th>
+        <th>discount</th>
+        <th>gender</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat = "article in order.articles">
+        <td>{[{article.aid}]}</td>
+        <td>{[{article.acolour}]}</td>
+        <td>{[{article.atype}]}</td>
+        <td>{[{article.arate}]}</td>
+        <td>{[{article.adiscount}]}</td>
+        <td>{[{article.agender}]}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <form name="articleForm" ng-submit = "addArticle()">
+      <div class="form-row" >
+      <div class="form-group col-md-2">
+        <label for="" class="col-form-label">article No</label>
+        <input type="number" class="form-control" id="" name="id" ng-required="true" ng-model = "curArticle.aid" placeholder="article No">
+        <span class="help-block" ng-show="articleForm.id.$invalid && !articleForm.id.$pristine">
+          article no.
+        </span>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="" class="col-form-label" >color</label>
+        <input type="text" class="form-control" name="colour" id="" ng-required="true" ng-model = "curArticle.acolour" placeholder="colour">
+        <span class="help-block" ng-show="articleForm.colour.$invalid && !articleForm.colour.$pristine">
+          color required.
+        </span>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="" class="col-form-label">type</label>
+        <input type="text" class="form-control" name="type" id="" ng-required="true" ng-model = "curArticle.atype" placeholder="type">
+        <span class="help-block" ng-show="articleForm.type.$invalid && !articleForm.type.$pristine">
+          cloth type required.
+        </span>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputOrderNo" class="col-form-label">rate</label>
+        <input type="number" class="form-control" id="" name="rate" ng-required="true" ng-model = "curArticle.arate" placeholder="rate">
+        <span class="help-block" ng-show="articleForm.rate.$invalid && !articleForm.rate.$pristine">
+          price rate required.
+        </span>
+      </div>
+      {{!-- <div class="form-group col-md-2">
+        <label for="" class="col-form-label" >discount</label>
+        <input type="number" class="form-control" name="discount" id="" ng-required="true" ng-model = "curArticle.adiscount" placeholder="discount">
+        <span class="help-block" ng-show="articleForm.discount.$invalid && !articleForm.discount.$pristine">
+          discount rate required.
+        </span>
+      </div> --}}
+      <div class="form-group col-md-2">
+        <label for="" class="col-form-label">gender</label></br>
+        <select name="gender" id="" ng-required="true" ng-model="curArticle.agender" class="form-control custom-select">
+          <option selected value="male">men</option>
+          <option value="female">women</option>
+        </select>
+        <span class="help-block" ng-show="articleForm.gender.$invalid && !articleForm.gender.$pristine">gender required.</span>
+      </div>
+      <button class="btn btn-primary" type="submit"  >add</button>
+  </form>
+</div>

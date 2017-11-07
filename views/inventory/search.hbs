@@ -1,0 +1,139 @@
+<div ng-app = "mainApp" ng-controller = "searchInventoryController">
+	<form ng-submit="getOrder()" class="">
+		<div class="form-group">
+			<input type="text" name="somekey" class="form-control" ng-model="orderid" placeholder="Search">
+		</div>
+		<button type="submit" class="btn btn-primary">Search Order</button>
+	</form>
+	<div ng-if="orderFetched">
+		<table class="table table-sm" ng-if = "1">
+			<thead>
+			  <tr>
+			    <th>No</th>
+			    <th>name</th>
+			    <th>phone</th>
+			    <th>QTY</th>
+			    <th>Date IN</th>
+			    <th>date OUT</th>
+			    <th>Status</th>
+			    <th>net amount</th>
+			    <th>Paid</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr>
+			    <td>{[{order.orderNo}]}</td>
+			    <td>{[{order.custname}]}</td>
+			    <td>{[{order.custphone}]}</td>
+			    <td>{[{order.ocount}]}</td>
+			    <td>{[{order.odatein}]}</td>
+			    <td>{[{order.odateout}]}</td>
+			    <td>{[{order.ostatus}]}</td>
+			    <td>{[{order.onetamount}]}</td>
+			    <td>{[{order.opaid}]}</td>
+			  </tr>
+			</tbody>
+		</table>
+		<div class="clearfix"></div>
+		<table class="table table-sm" ng-if = "1">
+			<thead>
+			  <tr>
+			    <th>No</th>
+			    <th>color</th>
+			    <th>type</th>
+			    <th>gender</th>
+			    <th>rate</th>
+			    <th>status</th>
+			    <th>date IN</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr ng-repeat = "article in order.articles">
+			    <td>{[{article.aid}]}</td>
+			    <td>{[{article.acolour}]}</td>
+			    <td>{[{article.atype}]}</td>
+			    <td>{[{article.agender}]}</td>
+			    <td>{[{article.arate}]}</td>
+			    <td>{[{article.astatus}]}</td>
+			    <td>{[{article.adatein}]}</td>
+			  </tr>
+			</tbody>
+		</table>
+	</div>
+	<div ng-if="editMode">
+		<form name="orderForm" ng-submit = "saveOrder()">
+			<div class="form-row">
+				<div class="form-group col-md-3">
+					<label for="inputOrderNo" class="col-form-label">order No</label>
+					<input type="number" class="form-control" id="inputOrderNo" ng-required="true" ng-model = "order.orderNo" placeholder="OrderNo">
+				</div>
+				<div class="form-group col-md-3">
+					<label for="inputCustName" class="col-form-label" >customer Name</label>
+					<input type="text" class="form-control" id="inputCustName" ng-required="true" ng-model = "order.custname" placeholder="Customer Name">
+				</div>
+				<div class="form-group col-md-3">
+					<label for="inputCustPhone" class="col-form-label">Phone</label>
+					<input type="number" class="form-control" id="inputCustPhone" ng-required="true" ng-model = "order.custphone" placeholder="Phone no">
+				</div>
+				<button class="btn btn-sauccess" type="submit">save order</button>
+			</div>
+		</form>
+		<div class="clearfix"></div>
+		<form name="articleForm">
+			<div class="form-row">
+				<div class="form-group col-md-1">
+					<label for="" class="col-form-label">#article</label>
+				</div>
+				<div class="form-group col-md-1">
+					<label for="" class="col-form-label" >color</label>
+				</div>
+				<div class="form-group col-md-2">
+					<label for="" class="col-form-label">type</label>
+				</div>
+				<div class="form-group col-md-1">
+					<label for="inputOrderNo" class="col-form-label">rate</label>
+				</div>
+				<div class="form-group col-md-1">
+					<label for="" class="col-form-label">gender</label></br>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="form-row" ng-repeat = "curArticle in order.articles">
+				<div class="form-group col-md-1">
+					<input type="number" class="form-control" id="" name="id" ng-required="true" ng-model = "curArticle.aid" placeholder="article No">
+					<span class="help-block" ng-show="articleForm.id.$invalid && !articleForm.id.$pristine">
+					article no.
+					</span>
+				</div>
+				<div class="form-group col-md-1">
+					<input type="text" class="form-control" name="colour" id="" ng-required="true" ng-model = "curArticle.acolour" placeholder="colour">
+					<span class="help-block" ng-show="articleForm.colour.$invalid && !articleForm.colour.$pristine">
+					color required.
+					</span>
+				</div>
+				<div class="form-group col-md-2">
+					<input type="text" class="form-control" name="type" id="" ng-required="true" ng-model = "curArticle.atype" placeholder="type">
+					<span class="help-block" ng-show="articleForm.type.$invalid && !articleForm.type.$pristine">
+					cloth type required.
+					</span>
+				</div>
+				<div class="form-group col-md-1">
+					<input type="number" class="form-control" id="" name="rate" ng-required="true" ng-model = "curArticle.arate" placeholder="rate">
+					<span class="help-block" ng-show="articleForm.rate.$invalid && !articleForm.rate.$pristine">
+					price rate required.
+					</span>
+				</div>
+				<div class="form-group col-md-1">
+					<select name="gender" id="" ng-required="true" ng-model="curArticle.agender" class="form-control custom-select">
+						<option selected value="male">men</option>
+						<option value="female">women</option>
+					</select>
+					<span class="help-block" ng-show="articleForm.gender.$invalid && !articleForm.gender.$pristine">gender required.</span>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</form>
+	</div>
+	<button class="btn btn-primary" ng-click="editorder()">edit</button>
+	<button ng-if="editMode" class="btn btn-primary" ng-click="cancelEditorder()">cancel</button>
+</div>
