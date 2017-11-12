@@ -46,34 +46,49 @@
 
   <form name="articleForm" ng-submit = "addArticle()">
       <div class="form-row" >
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-1">
         <label for="" class="col-form-label">article No</label>
         <input type="number" class="form-control" id="" name="id" ng-required="true" ng-model = "curArticle.aid" placeholder="article No">
         <span class="help-block" ng-show="articleForm.id.$invalid && !articleForm.id.$pristine">
           article no.
         </span>
       </div>
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-1">
         <label for="" class="col-form-label" >color</label>
         <input type="text" class="form-control" name="colour" id="" ng-required="true" ng-model = "curArticle.acolour" placeholder="colour">
         <span class="help-block" ng-show="articleForm.colour.$invalid && !articleForm.colour.$pristine">
           color required.
         </span>
       </div>
+      {{!--  --}}
       <div class="form-group col-md-2">
-        <label for="" class="col-form-label">type</label>
-        <input type="text" class="form-control" name="type" id="" ng-required="true" ng-model = "curArticle.atype" placeholder="type">
-        <span class="help-block" ng-show="articleForm.type.$invalid && !articleForm.type.$pristine">
-          cloth type required.
+        <label for="" class="col-form-label">Type</label></br>
+        <select name="type" class="form-control custom-select col-md-2" ng-model="selectedtype" ng-options="article.name for article in ArticleNames" ng-change="ratelist()" ng-required="true"></select>
+        <span class="help-block" ng-show="articleForm.type.$invalid && !articleForm.type.$pristine">type required.
         </span>
       </div>
       <div class="form-group col-md-2">
+        <label for="" class="col-form-label">Rate</label></br>
+        <select name="rate" ng-required="true" class="form-control custom-select" ng-model="selectedrate" ng-options="rate for rate in selectedarticle.price" ng-change="updaterate(selectedrate)"></select>
+        <span class="help-block" ng-show="articleForm.rate.$invalid && !articleForm.rate.$pristine">rate required.
+        </span>
+      </div>
+      {{!--  --}}
+      {{!-- <div class="form-group col-md-2">
+        <label for="" class="col-form-label">Type</label></br>
+        <select name="type" id="" ng-required="true" ng-model="curArticle.atype" class="form-control custom-select">
+          <option ng-repeat = "article in ArticleNames" value="article">{[{article.name}]}</option>
+        </select>
+        <span class="help-block" ng-show="articleForm.type.$invalid && !articleForm.type.$pristine">type required.
+        </span>
+      </div>
+      <div class="form-group col-md-1">
         <label for="inputOrderNo" class="col-form-label">rate</label>
         <input type="number" class="form-control" id="" name="rate" ng-required="true" ng-model = "curArticle.arate" placeholder="rate">
         <span class="help-block" ng-show="articleForm.rate.$invalid && !articleForm.rate.$pristine">
           price rate required.
         </span>
-      </div>
+      </div> --}}
       {{!-- <div class="form-group col-md-2">
         <label for="" class="col-form-label" >discount</label>
         <input type="number" class="form-control" name="discount" id="" ng-required="true" ng-model = "curArticle.adiscount" placeholder="discount">
@@ -81,13 +96,14 @@
           discount rate required.
         </span>
       </div> --}}
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-1">
         <label for="" class="col-form-label">gender</label></br>
         <select name="gender" id="" ng-required="true" ng-model="curArticle.agender" class="form-control custom-select">
           <option selected value="male">men</option>
           <option value="female">women</option>
         </select>
-        <span class="help-block" ng-show="articleForm.gender.$invalid && !articleForm.gender.$pristine">gender required.</span>
+        <span class="help-block" ng-show="articleForm.gender.$invalid && !articleForm.gender.$pristine">gender required.
+        </span>
       </div>
       <button class="btn btn-primary" type="submit"  >add</button>
   </form>
