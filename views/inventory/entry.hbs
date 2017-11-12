@@ -1,7 +1,7 @@
 <div ng-app = "mainApp" ng-controller = "inventoryController">
   <form name="orderForm" ng-submit = "saveOrder()">
       <div class="form-row">
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-1">
         <label for="inputOrderNo" class="col-form-label">order No</label>
         <input type="number" class="form-control" id="inputOrderNo" ng-required="true" ng-model = "order.orderNo" placeholder="OrderNo">
       </div>
@@ -13,7 +13,7 @@
         <label for="inputCustPhone" class="col-form-label">Phone</label>
         <input type="number" class="form-control" id="inputCustPhone" ng-required="true" ng-model = "order.custPhone" placeholder="Phone no">
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-1">
         <label for="inputOrderNo" class="col-form-label">discount</label>
         <input type="number" class="form-control" id="inputOrderNo" ng-required="true" ng-model = "order.oDiscount" placeholder="OrderNo">
       </div>
