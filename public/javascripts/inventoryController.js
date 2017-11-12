@@ -148,6 +148,8 @@ price:[250,400]}
       oNetAmount : null,
       articles:[]
    };
+   $scope.selectedtype = null;
+   $scope.selectedrate = null;
 
    // console.log($scope.order);
 
