@@ -18,7 +18,7 @@
         <li class=""><a href="#">advance search</a></li> --}}
       </ul>
       {{# if login}}
-      <form action="/api/testpost" method="post" class="navbar-form navbar-left">
+      <form ng-submit="headsearch()" class="navbar-form navbar-left">
         <div class="form-group">
           <input type="text" name="somekey" class="form-control" placeholder="Search">
         </div>

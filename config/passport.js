@@ -76,7 +76,7 @@ passport.use('local.signin', new LocalStrategy({
 		}
 		if (!user) {
 			console.log('user from findone: '+user)
-			return done(null,false, {message:"email does exists"});
+			return done(null,false, {message:"email does not exists"});
 		}
 		if (!user.validPassword(password)) {
 			return done(null,false, {message:"Bad Password"});

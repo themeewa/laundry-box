@@ -25,6 +25,7 @@ router.post('/saveNewOrder',isLoggedInApi,function(req, res, next) {
     return order.save(function(err,result) {
       if(err){
         console.log("error in saving order");
+        console.log(err);
         res.status(404).json({
           status:false,
           message:"failed",

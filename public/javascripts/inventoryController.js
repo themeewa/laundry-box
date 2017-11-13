@@ -3,7 +3,8 @@ var mainApp = angular.module("mainApp", []);
 mainApp.config(function($interpolateProvider) {
   $interpolateProvider.startSymbol('{[{');
   $interpolateProvider.endSymbol('}]}');
-});         
+});
+
 mainApp.controller('inventoryController',['$scope', '$http', function($scope,$http) {
   $scope.ArticleNames = [
 {name:"Gents suit 2 pcs",
@@ -141,17 +142,15 @@ price:[250,400]}
       orderNo : null,
       custName : "",
       custPhone : "",               
-      oCount : null,
+      oCount : 0,
       oStatus : "factory in",
-      oPrice : null,
-      oDiscount : null,
-      oNetAmount : null,
+      oPrice : 0,
+      oDiscount : 0,
+      oNetAmount : 0,
       articles:[]
    };
    $scope.selectedtype = null;
    $scope.selectedrate = null;
-
-   // console.log($scope.order);
 
    $scope.curArticle = {
          aid:$scope.counter+1,
@@ -225,33 +224,43 @@ price:[250,400]}
    };
 
    $scope.saveOrder = function() {
-      $scope.sendData($scope.order)
-      .then(function(res) {
-         if (res.status) {
-            console.log(res.data);
-            console.log("saveOrder succesfull");
-            $scope.order = {
-               orderNo : null,
-               custName : "",
-               custPhone : "",               
-               oCount : 0,
-               oStatus : "factory in",
-               oPrice : 0,
-               oDiscount : 0,
-               oNetAmount : 0,
-               articles:[]
-            };
-            $scope.counter = 0
-            $scope.curArticle.aid=1;
-            $scope.selectedtype = null;
-         }
-         if (!res.status) {
-            console.log(res.data);
-            console.log("saveorder failed");
-            return res;
-         }
-      });
+    if ($scope.order.oCount==0||$scope.order.oPrice==0||$scope.order.oNetAmount==0||$scope.order.articles.length==0) {
+      console.log("you tried Blank order");
+    }
+      else {
+        $scope.sendData($scope.order)
+          .then(function(res) {
+             if (res.status) {
+                console.log(res.data);
+                console.log("saveOrder succesfull");
+                $scope.order = {
+                   orderNo : null,
+                   custName : "",
+                   custPhone : "",               
+                   oCount : 0,
+                   oStatus : "factory in",
+                   oPrice : 0,
+                   oDiscount : 0,
+                   oNetAmount : 0,
+                   articles:[]
+                };
+                $scope.counter = 0
+                $scope.curArticle.aid=1;
+                $scope.selectedtype = null;
+             }
+             if (!res.status) {
+                console.log(res.data);
+                console.log("saveorder failed");
+                return res;
+             }
+          });
+        }
    };
+
+   // header search function
+   // $scope.headsearch=function() {
+   //  console.log("headsearch from inentory controller called");
+   // };
 
    // $scope.postOrder = $http.post('/api/saveNewOrder', $scope.order);
    //    postOrder.success(function(data, status, headers, config) {
@@ -269,6 +278,10 @@ mainApp.controller('searchInventoryController',['$scope', '$http', function($sco
    $scope.orderFetched = false;
    $scope.editMode = false;
    $scope.cancelEditMode = false;
+
+   // $scope.headsearch=function() {
+   //  console.log("headsearch from search inventory controller called");
+   // };
 
    $scope.getDataById = function(orderId) {
       console.log("getdatabyid api fun called");

@@ -1,9 +1,11 @@
 <div ng-app = "mainApp" ng-controller = "searchInventoryController">
 	<form ng-submit="getOrder()" class="">
-		<div class="form-group">
-			<input type="text" name="somekey" class="form-control" ng-model="orderid" placeholder="Search">
+		<div class="form-row">
+			<div class="form-group col-sm-3">
+				<input type="text" name="somekey" class="form-control" ng-model="orderid" placeholder="Search order">
+			</div>
+			<button type="submit" class="btn btn-primary">Search Order</button>
 		</div>
-		<button type="submit" class="btn btn-primary">Search Order</button>
 	</form>
 	<div ng-if="orderFetched">
 		<table class="table table-sm" ng-if = "1">
