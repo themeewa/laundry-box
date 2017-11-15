@@ -12,6 +12,7 @@ var flash = require('connect-flash');
 var validator = require('express-validator');
 var MongoStore = require('connect-mongo')(session);
 
+var nitk = require('./routes/nitk');
 var index = require('./routes/index');
 var inventory = require('./routes/inventory')
 var users = require('./routes/users');
@@ -52,6 +53,7 @@ app.use(function(req,res,next) {
 	next();
 })
 
+app.use('/nitk', nitk);
 app.use('/users', users);
 app.use('/api', api);
 app.use('/inventory', inventory);

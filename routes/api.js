@@ -4,6 +4,22 @@ var User  = require('../models/user');
 var Customer  = require('../models/customer');
 var Order  = require('../models/order');
 
+router.get('/sendmsg/:phone/:orderno',isLoggedInApi,function(req, res, next) {
+  var smscontent = "this is the msg content for now."
+    var options = {
+    "method": "GET",
+    "url": "api.msg91.com/api/sendhttp.php?sender=LAUNDRY&route=4&mobiles="+req.params.phone+"&authkey=183397A2qxqeXdE5a08ed04&encrypt=true&country=91&message="+smscontent+"&flash=&unicode=&schtime=&afterminutes=&response=&campaign=",
+    "headers": {}
+  };
+  return $http({options})
+       .then(function(response) {
+               console.log(response);
+       }, 
+       function(err) { // optional
+               console.log(err);
+       });
+});
+
 router.post('/saveNewOrder',isLoggedInApi,function(req, res, next) {
   console.log(req.body);
   if (req.body) {
